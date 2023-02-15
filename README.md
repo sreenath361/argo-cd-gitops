@@ -1,1 +1,1 @@
-Testing Continuous Deployment on Kubernetes with GitOps and ArgoCD
+Test Continuous Deployment on Kubernetes with GitOps and ArgoCD
