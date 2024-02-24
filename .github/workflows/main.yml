@@ -33,7 +33,6 @@ jobs:
         ECR_REPOSITORY: gitops-argocd
 
       run: |
-        #aws s3 ls
         # Build a docker container and push it to ECR
         git_hash=$(git rev-parse --short "$GITHUB_SHA")
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF##*/}-$git_hash .
@@ -48,7 +47,7 @@ jobs:
           sed -i "s/$version/${GITHUB_REF##*/}-$git_hash/" ./charts/helm-example/values.yaml
           
     - name: Commit and push changes
-      uses: devops-infra/action-commit-push@v0.3
+      uses: devops-infra/action-commit-push@v0.9.2
       with:
         github_token: ${{ secrets.GT_TOKEN }}
         commit_message: Version updated
