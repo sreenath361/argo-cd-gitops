@@ -4,7 +4,11 @@ name: Deploy to Argocd
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      master:
+        - sreenath361
+        - github-actions[bot]
+    
 jobs:
   build:
     name: Build and Pushing the Image
