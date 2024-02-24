@@ -5,9 +5,6 @@ name: Deploy to Argocd
 on:
   push:
     branches: [ master ]
-    users:
-      - sreenath361
-      - github-actions[bot]
 jobs:
   build:
     name: Build and Pushing the Image
@@ -48,11 +45,14 @@ jobs:
           git_hash=$(git rev-parse --short "$GITHUB_SHA")
           version=$(cat ./charts/helm-example/values.yaml | grep version: | awk '{print $2}')
           sed -i "s/$version/${GITHUB_REF##*/}-$git_hash/" ./charts/helm-example/values.yaml
-    - name: Print GitHub Token
-      run: echo ${{ secrets.GT_TOKEN }}
     
     - name: List files in the repository
-      run: ls -R
+      run: |
+        ls -R
+        ls -al
+        git remove -v
+        git status
+        pwd
 
     - name: Commit and push changes
       uses: devops-infra/action-commit-push@v0.9.2
