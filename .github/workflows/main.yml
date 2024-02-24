@@ -53,6 +53,7 @@ jobs:
         git remote -v
         git status
         pwd
+        git add . && git commit -m "Version updated" && git push origin master
 
     - name: Commit and push changes
       uses: devops-infra/action-commit-push@v0.9.2
